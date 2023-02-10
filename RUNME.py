@@ -37,32 +37,105 @@ job_json = {
         "max_concurrent_runs": 1,
         "tags": {
             "usage": "solacc_testing",
-            "group": "SOLACC"
+            "group": "FSI",
+            "repo": "nasdaq_crypto"
         },
         "tasks": [
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "nasdaq_crypto_cluster",
                 "notebook_task": {
-                    "notebook_path": f"01_Introduction_And_Setup"
+                    "notebook_path": f"01_Basic"
                 },
-                "task_key": "sample_solacc_01"
+                "task_key": "nasdaq_crypto_01"
             },
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "nasdaq_crypto_cluster",
                 "notebook_task": {
-                    "notebook_path": f"02_Analysis"
+                    "notebook_path": f"02_Basic-2"
                 },
-                "task_key": "sample_solacc_02",
+                "task_key": "nasdaq_crypto_02",
                 "depends_on": [
                     {
-                        "task_key": "sample_solacc_01"
+                        "task_key": "nasdaq_crypto_01"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"03_Crossed Markets Exploration"
+                },
+                "task_key": "nasdaq_crypto_03",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_02"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"04_Depth"
+                },
+                "task_key": "nasdaq_crypto_04",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_03"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"05_Depth 2"
+                },
+                "task_key": "nasdaq_crypto_05",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_04"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"06_MA's"
+                },
+                "task_key": "nasdaq_crypto_06",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_05"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"07_Market Fundamentals"
+                },
+                "task_key": "nasdaq_crypto_07",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_06"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "nasdaq_crypto_cluster",
+                "notebook_task": {
+                    "notebook_path": f"08_Performance"
+                },
+                "task_key": "nasdaq_crypto_08",
+                "depends_on": [
+                    {
+                        "task_key": "nasdaq_crypto_07"
                     }
                 ]
             }
         ],
         "job_clusters": [
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "nasdaq_crypto_cluster",
                 "new_cluster": {
                     "spark_version": "11.3.x-cpu-ml-scala2.12",
                 "spark_conf": {
@@ -71,7 +144,9 @@ job_json = {
                     "num_workers": 2,
                     "node_type_id": {"AWS": "i3.xlarge", "MSA": "Standard_DS3_v2", "GCP": "n1-highmem-4"},
                     "custom_tags": {
-                        "usage": "solacc_testing"
+                        "usage": "solacc_testing",
+                        "group": "FSI",
+                        "repo": "nasdaq_crypto"
                     },
                 }
             }
